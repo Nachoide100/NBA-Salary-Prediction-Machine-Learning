@@ -73,6 +73,7 @@ plt.xlabel('Number of Clusters (K)')
 plt.ylabel('WCSS (Inertia)')
 plt.grid(True, alpha=0.5)
 plt.legend()
+plt.savefig("visualizations/elbow_plot.png")
 plt.show()
 
 # --- 5. Fit the Final K-Means Model ---
