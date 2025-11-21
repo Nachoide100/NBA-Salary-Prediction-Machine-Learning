@@ -85,13 +85,13 @@ La distribución de salarios en la NBA es extremadamente asimétrica (unos pocos
 
 ### 2. Optimización y Rendimiento del Modelo
 
-Para evitar el *overfitting* y mejorar la precisión, no utilicé un modelo estándar. [cite_start]Implementé una estrategia de **Hyperparameter Tuning** utilizando `RandomizedSearchCV` con validación cruzada (5-folds) [cite: 1706-1712].
+Para evitar el *overfitting* y mejorar la precisión, no utilicé un modelo estándar.Implementé una estrategia de **Hyperparameter Tuning** utilizando `RandomizedSearchCV` con validación cruzada (5-folds).
 
-* [cite_start]**Estrategia de Tuning:** Buscamos minimizar el **MAE (Mean Absolute Error)** probando 50 combinaciones aleatorias de hiperparámetros [cite: 1722-1726].
+* **Estrategia de Tuning:** Buscamos minimizar el **MAE (Mean Absolute Error)** probando 50 combinaciones aleatorias de hiperparámetros.
 * **Espacio de Búsqueda:**
     * `n_estimators`: 100 a 500 árboles.
     * `max_depth`: Control de profundidad (10, 15, 20, None) para evitar memorización.
-    * [cite_start]`max_features`: (0.6, 0.8, Auto) para forzar la descorrelación de árboles [cite: 1688-1701].
+    * `max_features`: (0.6, 0.8, Auto) para forzar la descorrelación de árboles.
 
 **Configuración Ganadora:**
 El modelo óptimo convergió con `max_depth=10` y `max_features=0.6` (usar solo el 60% de las features por árbol ayudó a generalizar mejor).
@@ -101,7 +101,7 @@ Aquí es donde probé mi teoría. Al analizar qué variables pesaban más en la 
 
 ![Feature Importance](visualizations/features_importance.png)
 
-* **Puntos (PTS) y Minutos (MP)** representan más del **60%** del valor de un contrato [cite: 1817-1821].
+* **Puntos (PTS) y Minutos (MP)** representan más del **60%** del valor de un contrato.
 * Métricas de impacto real como **VORP** (Value Over Replacement) o **Win Shares** tienen un peso secundario (aprox. 10% y 5% respectivamente).
 * **Métricas de bajo valor:**Los arquetipos** no explican prácticamente nada del salario de un jugador. Esto (creo) es por incluir variables como PTS y Minutes Playes en las variables para determinar los clusters, lo hace que el modelo de más importancia a dichas variables por si solas.
 
