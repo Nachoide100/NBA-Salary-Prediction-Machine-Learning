@@ -47,15 +47,41 @@ La limpieza de datos fue la fase más crítica para evitar duplicados y sesgos e
 
 ---
 
-## 🧠 Fase 2: Los "Nuevos" Roles (Clustering)
+## 🧠 Fase 2: Redefiniendo Posiciones (Clustering & Arquetipos)
 
-Las posiciones tradicionales (Base, Alero, Pivot) no sirven para valorar salarios hoy en día. Usé **K-Means Clustering** sobre métricas de impacto (no de volumen) para redescubrir los roles reales de la NBA.
+Las etiquetas tradicionales (Base, Alero, Pivot) son obsoletas en la NBA moderna ("Positionless Basketball"). Para evaluar salarios justamente, necesitaba comparar jugadores con **roles similares** (no es justo comparar el salario de un especialista defensivo con el de una estrella anotadora basándose solo en puntos).
 
-Se identificaron **8 Arquetipos** distintos. Curiosamente, el análisis reveló una brecha estructural:
+### 1. Selección de Features y Preprocesamiento
+En lugar de usar etiquetas subjetivas, utilicé **Aprendizaje No Supervisado** para dejar que los datos definieran los roles.
+* **Feature Selection:** Seleccioné 14 métricas clave que definen el *estilo* y el *impacto*, combinando estadísticas de uso (`USG%`, `3PAr`) con métricas de eficiencia avanzada (`TS%`, `VORP`, `Win Shares`).
+* **Estandarización:** Dado que K-Means es sensible a la escala (no se puede comparar un porcentaje 0.40 con 2000 minutos), apliqué `StandardScaler` para normalizar todas las variables.
+* **Optimización (Elbow Method):** Probé un rango de $k=3$ a $k=15$ clusters. El análisis de la inercia (suma de distancias al cuadrado) indicó que el punto de inflexión óptimo ("codo") estaba en **k=8**. A continuación podemos ver el Elbow - Plot:
+
+  ![Elbow_plot](visualizations/elbow_plot.png)
+
+
+### 2. Los 8 "Nuevos" Arquetipos de la NBA
+[cite_start]El algoritmo agrupó a los jugadores en 8 perfiles distintivos basados en su rendimiento estadístico [cite: 783-813]:
+
+1.  **Elite Creator / Franchise Star:** Jugadores que dominan todas las métricas (alto uso, alta eficiencia, alto impacto). Ej: *Luka Doncic, Nikola Jokic*.
+2.  **High Impact Starter:** Segundas espadas de alto nivel y eficiencia.
+3.  **High Volume Inefficient Scorer:** Jugadores que amasan mucho balón y puntos, pero con porcentajes de tiro (TS%) y contribución a victorias (WS) bajos.
+4.  **Defensive Anchor:** Especialistas en rebote y tapones con bajo uso ofensivo.
+5.  **3&D Specialist:** Tiradores de tres puntos con defensa, sin creación de juego.
+6.  **Versatile Player:** Jugadores de rotación que cumplen en varias facetas sin destacar.
+7.  **Low Efficiency Creator:** Bases o generadores con poca efectividad.
+8.  **Low Impact / End of Bench:** Jugadores de fondo de armario con métricas negativas.
+
+### 3. Análisis de Brecha Estructural
+
+Al cruzar estos nuevos arquetipos con los datos salariales, descubrimos una ineficiencia masiva en el mercado:
 
 ![Comparación de Salarios por Arquetipo](visualizations/archetype_comparison.png)
 
-* **El Hallazgo:** Como se ve en la gráfica superior, el arquetipo *"High Volume Inefficient Scorer"* (Anotadores de volumen ineficientes) tiene una barra de salario real (azul/verde) desproporcionadamente alta comparada con su predicción.
+* **El Hallazgo "Moneyball":** Como se observa en la barra verde central del gráfico, el arquetipo **"High Volume Inefficient Scorer"** es la mayor ineficiencia del mercado.
+    * **El Problema:** Tienen el salario real más alto (azul/verde) en relación a su producción real.
+    * **La Causa:** El mercado tradicional paga por **Puntos Por Partido (PPG)**. Mi modelo (barra inferior) los penaliza fuertemente por su baja eficiencia y bajo impacto en victorias (WS).
+    * **Conclusión:** Los equipos están pagando precios de "Estrella" por jugadores que, matemáticamente, aportan el valor de un jugador de rol.
 
 ---
 
