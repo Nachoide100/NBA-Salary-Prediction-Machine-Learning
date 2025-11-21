@@ -83,16 +83,29 @@ La distribución de salarios en la NBA es extremadamente asimétrica (unos pocos
 
 ![Histograma Log Salary](visualizations/hist_salary_log.png)
 
-### 2. ¿Qué define el sueldo de un jugador? (Feature Importance)
+### 2. Optimización y Rendimiento del Modelo
+
+Para evitar el *overfitting* y mejorar la precisión, no utilicé un modelo estándar. [cite_start]Implementé una estrategia de **Hyperparameter Tuning** utilizando `RandomizedSearchCV` con validación cruzada (5-folds) [cite: 1706-1712].
+
+* [cite_start]**Estrategia de Tuning:** Buscamos minimizar el **MAE (Mean Absolute Error)** probando 50 combinaciones aleatorias de hiperparámetros [cite: 1722-1726].
+* **Espacio de Búsqueda:**
+    * `n_estimators`: 100 a 500 árboles.
+    * `max_depth`: Control de profundidad (10, 15, 20, None) para evitar memorización.
+    * [cite_start]`max_features`: (0.6, 0.8, Auto) para forzar la descorrelación de árboles [cite: 1688-1701].
+
+**Configuración Ganadora:**
+El modelo óptimo convergió con `max_depth=10` y `max_features=0.6` (usar solo el 60% de las features por árbol ayudó a generalizar mejor).
+
+### 3. ¿Qué define el sueldo de un jugador? (Feature Importance)
 Aquí es donde probé mi teoría. Al analizar qué variables pesaban más en la decisión del modelo, descubrimos la ineficiencia del mercado:
 
 ![Feature Importance](visualizations/features_importance.png)
 
-* **Puntos (PTS) y Minutos (MP)** representan más del **60%** del valor de un contrato.
-* Métricas de impacto real como **VORP** (Value Over Replacement) o **Win Shares** tienen un peso secundario.
-* **Conclusión:** La liga paga por **Volumen**, no por **Eficiencia**.
+* **Puntos (PTS) y Minutos (MP)** representan más del **60%** del valor de un contrato [cite: 1817-1821].
+* Métricas de impacto real como **VORP** (Value Over Replacement) o **Win Shares** tienen un peso secundario (aprox. 10% y 5% respectivamente).
+* **Métricas de bajo valor:**Los arquetipos** no explican prácticamente nada del salario de un jugador. Esto (creo) es por incluir variables como PTS y Minutes Playes en las variables para determinar los clusters, lo hace que el modelo de más importancia a dichas variables por si solas.
 
-### 3. Rendimiento del Modelo
+### 4. Rendimiento del Modelo
 El modelo explica el **58% ($R^2$)** de la varianza salarial. La gráfica de dispersión muestra una fuerte correlación, pero son precisamente los puntos que se alejan de la línea gris (los outliers) los que nos interesan: esas son las ineficiencias del mercado.
 
 ![Actual vs Predicted Salary](visualizations/salary_predictedsalary_players.png)
@@ -137,4 +150,4 @@ El análisis de datos confirma que **el mercado de la NBA no es 100% eficiente**
 3.  **La Oportunidad:** Equipos que fichen basándose en métricas avanzadas (buscando arquetipos infravalorados como *Versatile Players* o *3&D*) tendrán una ventaja competitiva significativa.
 
 ---
-*Autor: [Tu Nombre] - [Enlace a tu LinkedIn]*
+*Autor: José Ignacio Rubio - https://www.linkedin.com/in/jos%C3%A9-ignacio-rubio-194471308/*
