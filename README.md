@@ -132,13 +132,11 @@ Jugadores cuyo rendimiento no justifica su impacto en el tope salarial. Nótese 
 
 ![Top 20 Overpaid](visualizations/Top20_overpaid_players.png)
 
-### 📊 Ineficiencia Estructural por Arquetipo
-Al agregar el "Value Gap" por arquetipo, confirmamos la teoría inicial:
-
-![Value Gap por Arquetipo](visualizations/value_gap_archetype.png)
-
-* La barra verde gigante confirma que los **"High Volume Inefficient Scorers"** son, por mucho, el grupo más sobrepagado (Gap total de +$229M en la liga).
-* Por el contrario, los roles defensivos y versátiles tienden a estar justamente pagados o infravalorados.
+| Jugador | Salario Real | Salario Justo | Pérdida (Gap) |
+| :--- | :--- | :--- | :--- |
+| **Bradley Beal** | $59.0M | $17.2M | **$41.8M** |
+| **Paul George** | $51.7M | $16.2M | **$35.4M** |
+| **Lauri Markkanen** | $46.4M | $19M | **$27.4M** |
 
 ---
 
