@@ -61,7 +61,7 @@ En lugar de usar etiquetas subjetivas, utilicé **Aprendizaje No Supervisado** p
 
 
 ### 2. Los 8 "Nuevos" Arquetipos de la NBA
-[cite_start]El algoritmo agrupó a los jugadores en 8 perfiles distintivos basados en su rendimiento estadístico [cite: 783-813]:
+El algoritmo agrupó a los jugadores en 8 perfiles distintivos basados en su rendimiento estadístico:
 
 1.  **Elite Creator / Franchise Star:** Jugadores que dominan todas las métricas (alto uso, alta eficiencia, alto impacto). Ej: *Luka Doncic, Nikola Jokic*.
 2.  **High Impact Starter:** Segundas espadas de alto nivel y eficiencia.
@@ -71,17 +71,6 @@ En lugar de usar etiquetas subjetivas, utilicé **Aprendizaje No Supervisado** p
 6.  **Versatile Player:** Jugadores de rotación que cumplen en varias facetas sin destacar.
 7.  **Low Efficiency Creator:** Bases o generadores con poca efectividad.
 8.  **Low Impact / End of Bench:** Jugadores de fondo de armario con métricas negativas.
-
-### 3. Análisis de Brecha Estructural
-
-Al cruzar estos nuevos arquetipos con los datos salariales, descubrimos una ineficiencia masiva en el mercado:
-
-![Comparación de Salarios por Arquetipo](visualizations/archetype_comparison.png)
-
-* **El Hallazgo "Moneyball":** Como se observa en la barra verde central del gráfico, el arquetipo **"High Volume Inefficient Scorer"** es la mayor ineficiencia del mercado.
-    * **El Problema:** Tienen el salario real más alto (azul/verde) en relación a su producción real.
-    * **La Causa:** El mercado tradicional paga por **Puntos Por Partido (PPG)**. Mi modelo (barra inferior) los penaliza fuertemente por su baja eficiencia y bajo impacto en victorias (WS).
-    * **Conclusión:** Los equipos están pagando precios de "Estrella" por jugadores que, matemáticamente, aportan el valor de un jugador de rol.
 
 ---
 
